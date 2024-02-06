@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const timeSchema = new Schema({
     time: {
-        type: Number,
+        type: String,
     }
 });
 

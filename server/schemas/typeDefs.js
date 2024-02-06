@@ -1,18 +1,18 @@
 const typeDefs = `
   type User {
-    _id: ID
-    username: String
-    email: String
-    password: String
+    _id: ID!
+    username: String!
+    email: String!
+    password: String!
   }
 
   type Time {
-    _id: ID
-    time: Int
+    _id: ID!
+    time: String!
   }
 
   type Auth {
-    token: ID
+    token: ID!
     user: User
   }
 

@@ -3,9 +3,12 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        users: async () => {
-            return User.find()
-          },
+      users: async (parent, args, context) => {
+        if (context.user) {
+          return User.find({});
+        }
+        throw new AuthenticationError('You need to be logged in!');
+      },
     },
 
 Mutation: {
