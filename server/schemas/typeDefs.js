@@ -6,6 +6,11 @@ const typeDefs = `
     password: String
   }
 
+  type Time {
+    _id: ID
+    time: Int
+  }
+
   type Auth {
     token: ID
     user: User
@@ -13,6 +18,7 @@ const typeDefs = `
 
   type Query {
     users: [User]
+    time: [Time]
   }
 
   type Mutation {
