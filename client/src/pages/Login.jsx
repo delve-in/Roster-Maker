@@ -17,6 +17,7 @@ const Login = (props) => {
       ...formState,
       [name]: value,
     });
+    console.log(formState);
   };
 
   // submit form
@@ -32,12 +33,13 @@ const Login = (props) => {
     } catch (e) {
       console.error(e);
     }
-
+    console.log(formState);
     // clear form values
     setFormState({
       email: '',
       password: '',
     });
+
   };
 
   return (
@@ -49,7 +51,7 @@ const Login = (props) => {
             {data ? (
               <p>
                 Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
+                <Link to="/Home">back to the homepage.</Link>
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
