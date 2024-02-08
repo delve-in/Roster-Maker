@@ -1,9 +1,11 @@
 
 class AuthService {
-login(idToken) {
+login(idToken, username) {
     localStorage.setItem('id_token', idToken);
+    localStorage.setItem('username', username);
+
     console.log(idToken);
-    window.location.assign('/Home');
+    window.location.assign('/Dashboard');
   }
 }
 

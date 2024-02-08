@@ -29,7 +29,9 @@ const Login = (props) => {
         variables: { ...formState },
       });
 
-      Auth.login(data.login.token);
+      const { token, user } = data.login
+
+      Auth.login(token, user.username);
     } catch (e) {
       console.error(e);
     }
@@ -48,12 +50,12 @@ const Login = (props) => {
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">Login</h4>
           <div className="card-body">
-            {data ? (
+            {/* {data ? (
               <p>
                 Success! You may now head{' '}
                 <Link to="/Home">back to the homepage.</Link>
               </p>
-            ) : (
+            ) : ( */}
               <form onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
@@ -79,7 +81,7 @@ const Login = (props) => {
                   Submit
                 </button>
               </form>
-            )}
+            {/* )} */}
 
             {error && (
               <div className="my-3 p-3 bg-danger text-white">
