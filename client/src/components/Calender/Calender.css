@@ -1,0 +1,40 @@
+.container{
+ display: flex;
+ white-space: nowrap;
+ overflow-x: auto;
+}
+
+.subcontainer{
+    flex: 1 0 auto;
+    border: 1px solid black;
+    min-height: 100px;
+    text-align: center;
+}
+
+.container > div{
+    flex: 1 0 auto;
+    border: 1px solid black;
+    min-height: 100px;
+}
+.day{
+    border: 1px solid black;
+    min-height: 10px;
+}
+.date{
+    border: 1px solid black;
+    min-height: 10px;
+}
+.morning{
+    border: 1px solid black;
+    min-height: 150px;
+}
+.afternoon{
+    border: 1px solid black;
+    min-height: 150px;
+}
+
+@media screen and (max-width: 720px){
+    .container{
+        overflow-x: scroll;
+       }
+}
