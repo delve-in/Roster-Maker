@@ -34,7 +34,12 @@ const router = createBrowserRouter([
       {
         path: 'schedule',
         element: <Schedule/>,
-      }
+      },
+      {
+        path: 'login',
+        element: <Login/>,
+      },
+      
     ],
   },
 ]);

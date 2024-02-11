@@ -1,6 +1,7 @@
 const { User } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
-const { Shift, Schedule } = require('../models');
+const { Shift } = require('../models');
+const { Schedule  } = require('../models');
 
 const resolvers = {
   Query: {
@@ -11,9 +12,13 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
       shift: async (parent, { date, time }) => {
+        console.log("this is the date and time");
+        console.log(date, time);
         try {
-          // Find all shifts with matching date and time
+       
           const user = await Shift.find({ date: date, time: time });
+          
+          console.log("this is the return of shift.find");
           console.log(user);
           const username = user.map(item => item.username)
           console.log(username);
@@ -24,7 +29,7 @@ const resolvers = {
     },
       schedule: async (parent) => {
         try {
-          // Find all shifts with matching date and time
+         
           const schedules = await Schedule.find({});
           console.log(schedules);
           return schedules;
@@ -35,15 +40,15 @@ const resolvers = {
   },
 
   Mutation: {
-    addShift: async (parent, { shifts } , context) => {
+    addShift: async (parent, { shiftState }) => {
       try {
-        console.log(shifts); // Log the array of shifts
-    const newShifts = await Promise.all(shifts.map(async (shifts) => {
+        console.log(shiftState);
+    const newShifts = await Promise.all(shiftState.map(async (shift) => {
       const newShift = await Shift.create({
-        date: shifts.date,
-        day: shifts.day,
-        time: shifts.time,
-        username: shifts.username
+        date: shift.date,
+        day: shift.day,
+        time: shift.time,
+        username: shift.username
       });
       console.log(newShift);
       return newShift;
@@ -51,7 +56,7 @@ const resolvers = {
         return newShifts;
       }
       catch (error) {
-        // Handle any errors that occur during shift creation
+       
         console.error('Error adding shift:', error);
       }
     },
@@ -69,7 +74,7 @@ const resolvers = {
         return newShedule;
       }
       catch (error) {
-        // Handle any errors that occur during shift creation
+        
         console.error('Error adding shift:', error);
       }
     },

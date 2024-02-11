@@ -1,3 +1,5 @@
+
+
 .wrapper{
  display: flex;
  white-space: nowrap;
@@ -6,6 +8,7 @@
 
 .shift{
     padding: 10px;
+    
 }
 
 .staff{
@@ -33,12 +36,15 @@
     border: 1px solid black;
     min-height: 10px;
     padding: 10px;
-
+    background-color: #05445E;
+    color: white;
 }
 .date{
     border: 1px solid black;
     min-height: 10px;
     padding: 10px;
+    background-color: #05445E;
+    color: white;
 }
 .morning{
     border: 1px solid black;
@@ -47,6 +53,8 @@
 .afternoon{
     border: 1px solid black;
     min-height: 150px;
+    background-color: aliceblue;
+    
 }
 
 @media screen and (max-width: 720px){

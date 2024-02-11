@@ -44,17 +44,11 @@ const Login = (props) => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
+    <main className="main">
+      <div className="body">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Login</h4>
+          <h2 className="login">Login</h2>
           <div className="card-body">
-            {/* {data ? (
-              <p>
-                Success! You may now head{' '}
-                <Link to="/Home">back to the homepage.</Link>
-              </p>
-            ) : ( */}
               <form onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
@@ -72,6 +66,7 @@ const Login = (props) => {
                   value={formState.password}
                   onChange={handleChange}
                 />
+                <div className='btnDiv'>
                 <button
                   className="btn btn-block btn-primary"
                   style={{ cursor: 'pointer' }}
@@ -79,11 +74,11 @@ const Login = (props) => {
                 >
                   Submit
                 </button>
+                </div>
               </form>
-            {/* )} */}
 
             {error && (
-              <div className="my-3 p-3 bg-danger text-white">
+              <div>
                 {error.message}
               </div>
             )}

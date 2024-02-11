@@ -1,8 +1,9 @@
+import './style.css'
 function Footer() {
     return (
         
-        <div>
-            <a href="https://github.com/delve-in">BYE</a>
+        <div className="footer">
+              <h3 className='footerholder'><a className='afooter' href="https://github.com/delve-in">&copy; github/delve-in</a></h3>
         </div>
         
     );

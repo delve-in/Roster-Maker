@@ -43,7 +43,7 @@ const typeDefs = `
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addShift(shifts: [ShiftInput]): [Shift]
+    addShift(date: String!, day: String!, time: String!, username: String!): Shift
     addSchedule(date: String!, day: String!, time: String!, username: String!): Schedule
   }
   `;

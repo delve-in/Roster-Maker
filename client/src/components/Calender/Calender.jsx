@@ -2,6 +2,8 @@ import './Calender.css'
 import { useState } from 'react';
 import { QUERY_SCHEDULE } from '../../utils/queries';
 import { useQuery } from '@apollo/client';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { Button} from 'antd';
 
 const Calender = () => {
     const schedule = [
@@ -36,7 +38,7 @@ const Calender = () => {
             "username": "Ken",
         },
     ];
-
+    let extractedData = "";
     const [showNextWeek, setShowNextWeek] = useState(false);
 
     const toggleNextWeek = () => {
@@ -46,6 +48,63 @@ const Calender = () => {
     const { loading, data } = useQuery(QUERY_SCHEDULE);
 
     console.log(data);
+    if (data) {
+        extractedData = data.schedule.map(item => ({
+            date: item.date,
+            day: item.day,
+            time: item.time,
+            username: item.username
+        }));
+        console.log("this is the extracted data")
+        console.log(extractedData);
+    }
+
+    function showNavigation() {
+        if (extractedData) {
+            return (
+                <div>
+                    <div className='wrapper'>
+                        {getWeekDates().map((Item, index) => (
+                            <div className='subcontainer' key={index}>
+                                <div className='date'>{Item.date}</div>
+                                <div className='day'>{Item.day}</div>
+                                <div className='morning'>
+                                    <div className='shift'>Morning Shift</div>
+                                    {extractedData.find(item => item.date === Item.date && item.time === 'Morning')?.username && (
+                                        <div className="staff">
+                                            {extractedData.find(item => item.date === Item.date && item.time === 'Morning')?.username}
+                                        </div>
+                                    )}
+                                </div>
+                                <div className='morning'>
+                                    <div className='shift'>Afternoon Shift</div>
+                                    {extractedData.find(item => item.date === Item.date && item.time === 'Afternoon')?.username && (
+                                        <div className="staff">
+                                            {extractedData.find(item => item.date === Item.date && item.time === 'Afternoon')?.username}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                </div>
+            );
+        } else {
+            return (
+                <div className='wrapper'>
+                    {getWeekDates().map((Item, index) => (
+                        <div className='subcontainer' key={index}>
+                            <div className='date'>{Item.date}</div>
+                            <div className='day'>{Item.day}</div>
+                            <div className='afternoon'><div className='shift'>Morning Shiift</div></div>
+                            <div className='afternoon'><div className='shift'>Afternoon Shiift</div></div>
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+    }
 
     const getWeekDates = () => {
         const today = new Date();
@@ -84,33 +143,10 @@ const Calender = () => {
 
     return (
         <div >
-            <button onClick={toggleNextWeek}>
-                {showNextWeek ? 'Hide Current Week' : 'Show Next Week'}
-            </button>
-            <div className='wrapper'>
-                {getWeekDates().map((Item, index) => (
-                    <div className='subcontainer' key={index}>
-                        <div className='date'>{Item.date}</div>
-                        <div className='day'>{Item.day}</div>
-                        <div className='morning'>
-                            Morning Shift
-                            {schedule.find(item => item.date === Item.date && item.time === 'Morning')?.username && (
-                                <div className="staff">
-                                    {schedule.find(item => item.date === Item.date && item.time === 'Morning')?.username}
-                                </div>
-                            )}
-                        </div>
-                        <div className='morning'>
-                            <div className='shift'>Afternoon Shift</div>
-                            {schedule.find(item => item.date === Item.date && item.time === 'Afternoon')?.username && (
-                                <div className="staff">
-                                    {schedule.find(item => item.date === Item.date && item.time === 'Afternoon')?.username}
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                ))}
-            </div>
+             <Button type="primary" onClick={toggleNextWeek} icon={<LeftOutlined />} disabled={!showNextWeek} size="default" />
+             <Button type="primary" onClick={toggleNextWeek} icon={<RightOutlined />} disabled={showNextWeek} size="default" />
+            <div>{loading ? (<div>Loading...</div>):(showNavigation())}</div>
+            
         </div>
     );
 };

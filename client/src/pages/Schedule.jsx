@@ -1,10 +1,11 @@
 
 import { useState } from 'react';
-import { Modal } from 'antd';
+import { Modal,Button } from 'antd';
 import { QUERY_SHIFT } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 import { ADD_SCHEDULE } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 const Schedule = () => {
     const names = [
@@ -27,7 +28,7 @@ const Schedule = () => {
     const [timeState, setTimeState] = useState("");
     const [dayState, setDayState] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [userState, setUserState] = useState("");
+    // const [userState, setUserState] = useState("");
 
     const [addSchedule, { error }] = useMutation(ADD_SCHEDULE);
 
@@ -37,6 +38,8 @@ const Schedule = () => {
     const { loading, data } = useQuery( QUERY_SHIFT , {
         variables: { date: dateState, time: timeState},
       });
+     const test = data?.username || [];
+     console.log(`this is test ${test}`);
    
   const handleOk = () => {
     setIsModalOpen(false);
@@ -107,16 +110,15 @@ const Schedule = () => {
 
     return (
         <div >
-            <button onClick={toggleNextWeek}>
-                {showNextWeek ? 'Show Current Week' : 'Show Next Week'}
-            </button>
+            <Button type="primary" onClick={toggleNextWeek} icon={<LeftOutlined />} disabled={!showNextWeek} size="default" />
+             <Button type="primary" onClick={toggleNextWeek} icon={<RightOutlined />} disabled={showNextWeek} size="default" />
             <div className='wrapper'>
             {getWeekDates().map((Item, index) => (
                 <div className='subcontainer' key={index}>
                     <div className='date'>{Item.date}</div>
                     <div className='day'>{Item.day}</div> 
                     <div className='morning' onClick={() => handleClick('Morning', Item)}>Morning</div>
-                    <div className='afternoon'  onClick={() => handleClick('Afternoon', Item)}>Afternoon</div>
+                    <div className='morning'  onClick={() => handleClick('Afternoon', Item)}>Afternoon</div>
                 </div>
             ))}
             </div>
@@ -125,6 +127,13 @@ const Schedule = () => {
         <div onClick={() => handleModalClick(name.username)} key={index}>{name.username}</div>
       ))}</div>
       </Modal>
+      <Button type="primary" size="default">
+            Sent
+          </Button>
+          <div>
+            {loading ? (<div>Loading...</div>
+            ):(<div className='morning'> {test} </div>)}
+          </div>
         </div>
     );
 };

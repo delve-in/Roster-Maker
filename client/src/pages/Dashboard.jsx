@@ -7,9 +7,16 @@ export default function Dashboard(){
 
 
 
+
+
     return (
         <div>
-            <h1>{username}</h1>
+            <div className="Dash-con">
+            <div className="Dash-card">
+            <div className="nameholder"><h1> Hi, {username}</h1></div>
+            
+            </div>
+            </div>
            
         </div>
     )

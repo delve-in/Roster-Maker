@@ -6,7 +6,9 @@ import './Availability.css'
 
 
 const Availability = () => {
-
+    const toggleNextWeek = () => {
+        setShowNextWeek(!showNextWeek);
+    };
     
 
     const [shiftState, setShiftState] = useState([]);
@@ -28,15 +30,15 @@ const Availability = () => {
       const handleSubmit = async (e) =>{
         e.preventDefault();
         try {
-            const ShiftInput = shiftState.map(shift => ({
-                date: shift.date,
-                day: shift.day,
-                time: shift.time,
-                username: shift.username
-            }));
-            console.log(ShiftInput);
-          await addShift({
-            variables: { shifts: ShiftInput },
+            // const ShiftInput = shiftState.map(shift => ({
+            //     date: shift.date,
+            //     day: shift.day,
+            //     time: shift.time,
+            //     username: shift.username
+            // }));
+            console.log(shiftState);
+          const { data } = await addShift({
+            variables: { shiftState: shiftState },
           });
 
           console.log('Shifts added');
@@ -56,12 +58,12 @@ const Availability = () => {
         const week_dates = [];
 
         for (let i = 0; i < 7; i++) {
-            const date = new Date(start_of_current_week);
-            date.setDate(start_of_current_week.getDate() + i);
+            const date = new Date(start_of_next_week);
+            date.setDate(start_of_next_week.getDate() + i);
             week_dates.push(
                 {
-                    date: date.toISOString().slice(0, 10),
-                    day: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][date.getDay()]
+                    date: date.toISOString().slice(0, 10), 
+                    day:['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][date.getDay()]
                 });
         }
 
@@ -69,19 +71,24 @@ const Availability = () => {
     };
 
     return (
-        <div >
+        <div className='box-boss'>
+            <div className="box-container">
             <div className="box">
+                <h2 className='heading'>Select and submit you Availability</h2>
+                <div>_____________________________________________________</div>
                 {getWeekDates().map((Item, index) => (
+                    
                     <div className='wrap' key={index}>{Item.date} ({Item.day})
-                    <div className='radio' onChange={(e) => handleChange(Item.date, Item.day, e.target.value)} ><Radio.Group defaultValue="Not Available" buttonStyle="solid">
+                    <div className='radio' onChange={(e) => handleChange(Item.date, Item.day, e.target.value)} ><Radio.Group buttonStyle="solid">
                                 <Radio.Button value="Morning">Morning</Radio.Button>
                                 <Radio.Button value="Afternoon">Afternoon</Radio.Button>
                                 <Radio.Button value="Not Available">Not Available</Radio.Button>
                             </Radio.Group></div> 
                     </div>))}
-                    <Button type="primary" size='default' onClick={handleSubmit} >Submit</Button>
+                    <div className='butnDiv'><Button type="primary" size='default' onClick={handleSubmit} >Submit</Button></div>
+                    
             </div>
-
+            </div>
         </div>
     );
 };
