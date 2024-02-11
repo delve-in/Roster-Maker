@@ -21,6 +21,9 @@ const Nav = () => {
       <Menu.Item key="availability" icon={<AppstoreOutlined />}>
         <Link to="/Availability">Availability</Link>
       </Menu.Item>
+      <Menu.Item key="schedule" icon={<AppstoreOutlined />}>
+        <Link to="/Schedule">Schedule</Link>
+      </Menu.Item>
     </Menu>
   );
 };

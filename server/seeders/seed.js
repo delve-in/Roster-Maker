@@ -1,6 +1,8 @@
 const db = require('../config/connection');
-const { User} = require('../models');
+const { User, Shift, Schedule } = require('../models');
 const userSeeds = require('./userSeeds.json');
+const shiftSeeds = require('./shiftSeeds.json');
+
 const cleanDB = require('./cleanDB');
 
 db.once('open', async () => {
@@ -9,7 +11,9 @@ db.once('open', async () => {
     await cleanDB('User', 'users');
     
     await User.create(userSeeds);
-
+    await Shift.create(shiftSeeds);
+    await Schedule.create(shiftSeeds);
+    
   } catch (err) {
     console.error(err);
     process.exit(1);

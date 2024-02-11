@@ -1,0 +1,16 @@
+.custom-switch .ant-switch-handle {
+    background-color: #18ff2f; /* Set the color of the switch handle */
+  }
+  
+  .custom-switch .ant-switch-handle:before {
+    background-color: #ff0000; /* Set the color of the switch handle when active */
+  }
+
+.radio{
+    margin: 1%;
+    display: inline;
+}
+
+.wrap{
+    margin: 1%;
+}

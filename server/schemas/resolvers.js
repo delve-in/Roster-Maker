@@ -1,17 +1,78 @@
 const { User } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
+const { Shift, Schedule } = require('../models');
 
 const resolvers = {
-    Query: {
-      users: async (parent, args, context) => {
-        if (context.user) {
-          return User.find({});
-        }
-        throw new AuthenticationError('You need to be logged in!');
-      },
+  Query: {
+    users: async (parent, args, context) => {
+      if (context.user) {
+        return User.find({});
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
+      shift: async (parent, { date, time }) => {
+        try {
+          // Find all shifts with matching date and time
+          const user = await Shift.find({ date: date, time: time });
+          console.log(user);
+          const username = user.map(item => item.username)
+          console.log(username);
+          return username;
+      } catch (error) {
+          console.error('Error retrieving shifts:', error);
+      }
+    },
+      schedule: async (parent) => {
+        try {
+          // Find all shifts with matching date and time
+          const schedules = await Schedule.find({});
+          console.log(schedules);
+          return schedules;
+      } catch (error) {
+          console.error('Error retrieving shifts:', error);
+      }
+    },
+  },
 
-Mutation: {
+  Mutation: {
+    addShift: async (parent, { shifts } , context) => {
+      try {
+        console.log(shifts); // Log the array of shifts
+    const newShifts = await Promise.all(shifts.map(async (shifts) => {
+      const newShift = await Shift.create({
+        date: shifts.date,
+        day: shifts.day,
+        time: shifts.time,
+        username: shifts.username
+      });
+      console.log(newShift);
+      return newShift;
+    }));
+        return newShifts;
+      }
+      catch (error) {
+        // Handle any errors that occur during shift creation
+        console.error('Error adding shift:', error);
+      }
+    },
+    addSchedule: async (parent, { date, day, time, username } , context) => {
+      try {
+        console.log(date, day, time, username);
+        console.log("inside resolver");
+      const newShedule = await Shift.create({
+        date: date,
+        day: day,
+        time: time,
+        username: username
+      });
+      console.log(`newShedule from resolver ${newShedule}`);
+        return newShedule;
+      }
+      catch (error) {
+        // Handle any errors that occur during shift creation
+        console.error('Error adding shift:', error);
+      }
+    },
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
@@ -34,7 +95,8 @@ Mutation: {
 
       return { token, user };
     },
-}
-}
+    
+  }
+};
 
 module.exports = resolvers;

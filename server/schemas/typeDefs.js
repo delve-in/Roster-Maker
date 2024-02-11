@@ -6,9 +6,27 @@ const typeDefs = `
     password: String!
   }
 
-  type Time {
+  type Schedule {
     _id: ID!
+    date: String!
+    day: String!
     time: String!
+    username: String!
+  }
+
+  type Shift {
+    _id: ID!
+    date: String!
+    day: String!
+    time: String!
+    username: String!
+  }
+
+  input ShiftInput{
+    date: String!
+    day: String!
+    time: String!
+    username: String!
   }
 
   type Auth {
@@ -18,12 +36,15 @@ const typeDefs = `
 
   type Query {
     users: [User]
-    time: [Time]
+    shift (date: String!, time: String!): Shift
+    schedule: [Schedule]
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    addShift(shifts: [ShiftInput]): [Shift]
+    addSchedule(date: String!, day: String!, time: String!, username: String!): Schedule
   }
   `;
 

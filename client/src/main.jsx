@@ -6,6 +6,8 @@ import Dashboard from './pages/Dashboard.jsx'
 import App from './App.jsx'
 import Roster from './pages/Roster.jsx'
 import Availability from './pages/Availability.jsx'
+import Schedule from './pages/Schedule.jsx'
+
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: 'availability',
         element: <Availability/>,
+      },
+      {
+        path: 'schedule',
+        element: <Schedule/>,
       }
     ],
   },
