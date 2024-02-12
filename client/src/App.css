@@ -124,7 +124,12 @@ box-shadow: 0px 0px 8px 4px rgba(0,0,0,0.47);
 
   .Dash-con{
     width: 100%;
-    background-color;
     height: 95vh;
     display: flex;
   }
+
+  .delte-wrap{
+    text-align: center;
+    margin: 35px;
+  }
+

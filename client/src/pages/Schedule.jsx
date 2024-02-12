@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Modal,Button } from 'antd';
+import { Modal,Button, Radio } from 'antd';
 import { QUERY_SHIFT } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 import { ADD_SCHEDULE } from '../utils/mutations';
@@ -15,8 +15,10 @@ const Schedule = () => {
     const [dateState, setDateState] = useState("");
     const [timeState, setTimeState] = useState("");
     const [dayState, setDayState] = useState("");
+    const [deleteDate, setDeleteDate] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModal1Open, setIsModal1Open] = useState(false);
+    const [isModal2Open, setIsModal2Open] = useState(false);
 
     const [addSchedule, { error }] = useMutation(ADD_SCHEDULE);
 
@@ -37,16 +39,26 @@ const Schedule = () => {
         console.log("this is the extracted data")
         console.log(extracteduser);
     }
-   
+
+   const handleDelete = (date) =>{
+    console.log(`this is date : ${date}`);
+    setIsModal2Open(true);
+    setDeleteDate(date);
+   };
   const handleOk = () => {
     setIsModalOpen(false);
     setIsModal1Open(false);
 
   };
 
+  const handle2Ok = () => {
+
+  };
+
   const handleCancel = () => {
     setIsModalOpen(false);
     setIsModal1Open(false);
+    setIsModal2Open(false);
   };
 
   const handleModalClick = async(name) => {
@@ -131,8 +143,8 @@ const Schedule = () => {
             <div className='wrapper'>
             {getWeekDates().map((Item, index) => (
                 <div className='subcontainer' key={index}>
-                    <div className='date'>{Item.date}</div>
-                    <div className='day'>{Item.day}</div> 
+                    <div className='date' onClick={() => handleDelete(Item.date)}>{Item.date}</div>
+                    <div className='day'>{Item.day}</div>
                     <div className='morning' onClick={() => handleClick('Morning', Item)}>Morning</div>
                     <div className='morning'  onClick={() => handleClick('Afternoon', Item)}>Afternoon</div>
                 </div>
@@ -143,6 +155,22 @@ const Schedule = () => {
       </Modal>
       <Modal title={`Success`} open={isModal1Open} onOk={handleOk} onCancel={handleCancel}>
         <div >Scheduling successfull !</div>
+      </Modal>
+      
+      <Modal open={isModal2Open} title={`Delete Shift on ${deleteDate}`} onOk={handle2Ok} onCancel={handleCancel} footer={[
+          <Button key="back" onClick={handleCancel}>
+            Cancel
+          </Button>,
+          <Button key="submit" type="primary" danger loading={loading} onClick={handleOk}>
+            Delete
+          </Button>,
+        ]}>
+          <div className='delte-wrap'>
+            <h2> Which Shift do you want to delete ? </h2>
+        <Radio.Group buttonStyle="solid" className='radio-delete'>
+                                <Radio.Button value="Morning" danger >Morning</Radio.Button>
+                                <Radio.Button value="Afternoon" danger >Afternoon</Radio.Button>
+                            </Radio.Group></div>
       </Modal>
       <Button type="primary" size="default">
             Sent

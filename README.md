@@ -1,2 +1,2 @@
 # Roster-Maker
-Roster-Maker. Bootcamp Final Project
+Dont forget to change back the DB secret
