@@ -16,7 +16,7 @@ const Schedule = () => {
     const [timeState, setTimeState] = useState("");
     const [dayState, setDayState] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
-    // const [userState, setUserState] = useState("");
+    const [isModal1Open, setIsModal1Open] = useState(false);
 
     const [addSchedule, { error }] = useMutation(ADD_SCHEDULE);
 
@@ -40,15 +40,20 @@ const Schedule = () => {
    
   const handleOk = () => {
     setIsModalOpen(false);
+    setIsModal1Open(false);
+
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    setIsModal1Open(false);
   };
 
   const handleModalClick = async(name) => {
 
     console.log(`Clicked on ${name} ${timeState} ${dateState} ${dayState}`);
+    setIsModalOpen(false);
+    setIsModal1Open(true);
     try {
       const schedule = await addSchedule({
         variables: { date: dateState, day: dayState, time: timeState, username: name},
@@ -74,7 +79,7 @@ const Schedule = () => {
       if (extracteduser) {
           return (
             extracteduser.map((item, index) => (
-              <div className='available' key={index}>{item.username}</div>
+              <div className='available' onClick={() => handleModalClick(item.username)} key={index}>{item.username}</div>
             ))
           );
       } else {
@@ -135,6 +140,9 @@ const Schedule = () => {
             </div>
       <Modal title={`Available staff for the shift on ${dateState} - ${timeState} `} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
         <div >{loading ? (<div>Loading...</div>) : (showNavigation())}</div>
+      </Modal>
+      <Modal title={`Success`} open={isModal1Open} onOk={handleOk} onCancel={handleCancel}>
+        <div >Scheduling successfull !</div>
       </Modal>
       <Button type="primary" size="default">
             Sent

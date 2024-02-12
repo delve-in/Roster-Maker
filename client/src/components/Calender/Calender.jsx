@@ -11,9 +11,10 @@ const Calender = () => {
 
     const toggleNextWeek = () => {
         setShowNextWeek(!showNextWeek);
+        refetch();
     };
 
-    const { loading, data } = useQuery(QUERY_SCHEDULE);
+    const { loading, data, refetch } = useQuery(QUERY_SCHEDULE);
 
     console.log(data);
     if (data) {
@@ -46,7 +47,6 @@ const Calender = () => {
                                         .map((morningData, morningIndex) => (
                                             <div className="staff" key={morningIndex}>
                                                 {morningData.username}
-                                                {console.log(`this is morning username ${morningData.username}`)}
                                             </div>
                                         ))
                                     }
@@ -58,7 +58,6 @@ const Calender = () => {
                                         .map((afternoonData, afternoonIndex) => (
                                             <div className="staff" key={afternoonIndex}>
                                                 {afternoonData.username}
-                                                {console.log(`this is Afternoon username ${afternoonData.username}`)}
                                             </div>
                                         ))
                                     }
