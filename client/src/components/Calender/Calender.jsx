@@ -27,10 +27,7 @@ const Calender = () => {
         console.log("this is the extracted data")
         console.log(extractedData);
     }
-
-
-
-
+    
     function showNavigation() {
         if (extractedData) {
             return (

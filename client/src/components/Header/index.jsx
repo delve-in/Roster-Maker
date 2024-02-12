@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
-import { AppstoreOutlined, MailOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, HomeOutlined, PoweroffOutlined, EditOutlined, UploadOutlined } from '@ant-design/icons';
 
 function Nav () {
 
@@ -10,7 +10,7 @@ function Nav () {
   function showNavigation() {
     if (manager === "Brian Kernighan") { 
       return (
-        <Menu.Item key="schedule" icon={<AppstoreOutlined />}>
+        <Menu.Item key="schedule" icon={<EditOutlined />}>
         <Link to="/Schedule">Schedule</Link>
       </Menu.Item>
       );}
@@ -24,25 +24,26 @@ function Nav () {
   };
 
   return (
+   <div>
    
     <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" style={{ display: 'flex', justifyContent: 'center' }}>
-      <Menu.Item key="dashboard" icon={<MailOutlined />}>
+      <Menu.Item key="dashboard" icon={<HomeOutlined />}>
         <Link to="/Dashboard">Dashboard</Link>
       </Menu.Item>
       <Menu.Item key="roster" icon={<AppstoreOutlined />}>
         <Link to="/Roster">Roster</Link>
       </Menu.Item>
-      <Menu.Item key="availability" icon={<AppstoreOutlined />}>
+      <Menu.Item key="availability" icon={<UploadOutlined />}>
         <Link to="/Availability">Availability</Link>
       </Menu.Item>
       {showNavigation()}
-      <Menu.SubMenu key="SubMenu" title="Logout" icon={<AppstoreOutlined />}>
-      <Menu.Item key="logout" icon={<AppstoreOutlined />}>
+      <Menu.SubMenu key="SubMenu" title="Logout" icon={<PoweroffOutlined />}>
+      <Menu.Item key="logout" icon={<PoweroffOutlined />}>
       <Link to="/login">Are you sure?</Link>
       </Menu.Item>
       </Menu.SubMenu>
     </Menu>
-
+    </div>
   );
 }
 
