@@ -8,20 +8,7 @@ import { useMutation } from '@apollo/client';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 const Schedule = () => {
-    const names = [
-        {
-          "username": 'Max',
-        },
-        {
-          "username": 'Kanat',
-        },
-        {
-          "username": 'Alexander',
-        },
-        {
-          "username": 'Max Kanat-Alexander',
-        }
-      ];
+
     
     let extracteduser = "";
     const [showNextWeek, setShowNextWeek] = useState(false);
@@ -87,7 +74,7 @@ const Schedule = () => {
       if (extracteduser) {
           return (
             extracteduser.map((item, index) => (
-              <div key={index}>{item.username}</div>
+              <div className='available' key={index}>{item.username}</div>
             ))
           );
       } else {
@@ -146,8 +133,8 @@ const Schedule = () => {
                 </div>
             ))}
             </div>
-      <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <div>{loading ? (<div>Loading...</div>) : (showNavigation())}</div>
+      <Modal title={`Available staff for the shift on ${dateState} - ${timeState} `} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <div >{loading ? (<div>Loading...</div>) : (showNavigation())}</div>
       </Modal>
       <Button type="primary" size="default">
             Sent
