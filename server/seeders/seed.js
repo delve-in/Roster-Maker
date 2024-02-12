@@ -1,7 +1,6 @@
 const db = require('../config/connection');
 const { User } = require('../models');
 const userSeeds = require('./userSeeds.json');
-const shiftSeeds = require('./shiftSeeds.json');
 
 const cleanDB = require('./cleanDB');
 
