@@ -1,4 +1,4 @@
-import { Button, Radio } from 'antd';
+import { Button, Radio, Modal } from 'antd';
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_SHIFT } from '../../utils/mutations';
@@ -10,10 +10,18 @@ const Availability = () => {
         setShowNextWeek(!showNextWeek);
     };
     
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [shiftState, setShiftState] = useState([]);
-
+    let username = localStorage.getItem("username");
     const [addShift, { error }] = useMutation(ADD_SHIFT);
+
+    const handleOk = () => {
+        setIsModalOpen(false);
+      };
+    
+      const handleCancel = () => {
+        setIsModalOpen(false);
+      };
 
     const handleChange = (date, day, time) => {
         let username = localStorage.getItem("username");
@@ -30,18 +38,12 @@ const Availability = () => {
       const handleSubmit = async (e) =>{
         e.preventDefault();
         try {
-            // const ShiftInput = shiftState.map(shift => ({
-            //     date: shift.date,
-            //     day: shift.day,
-            //     time: shift.time,
-            //     username: shift.username
-            // }));
-            console.log(shiftState);
-          const { data } = await addShift({
-            variables: { shiftState: shiftState },
-          });
+            for (const shiftData of shiftState){
+                const shift = await addShift({variables: shiftData});
+                console.log(`shift added ${shift}`);
+                setIsModalOpen(true);
+            }
 
-          console.log('Shifts added');
         } catch (err) {
           console.error(err);
         }
@@ -75,7 +77,7 @@ const Availability = () => {
             <div className="box-container">
             <div className="box">
                 <h2 className='heading'>Select and submit you Availability</h2>
-                <div>_____________________________________________________</div>
+                <div className='line'>..._ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _...</div>
                 {getWeekDates().map((Item, index) => (
                     
                     <div className='wrap' key={index}>{Item.date} ({Item.day})
@@ -86,6 +88,10 @@ const Availability = () => {
                             </Radio.Group></div> 
                     </div>))}
                     <div className='butnDiv'><Button type="primary" size='default' onClick={handleSubmit} >Submit</Button></div>
+                    <Modal title={`Hi,${username}`} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                        <div className='alert'><h3>Thank You !</h3><p>Your availability was submitted successfully</p></div>
+        
+      </Modal>
                     
             </div>
             </div>

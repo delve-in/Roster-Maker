@@ -20,9 +20,9 @@ const resolvers = {
           
           console.log("this is the return of shift.find");
           console.log(user);
-          const username = user.map(item => item.username)
-          console.log(username);
-          return username;
+          // const username = user.map(item => item.username)
+          // console.log(username);
+          return user;
       } catch (error) {
           console.error('Error retrieving shifts:', error);
       }
@@ -31,7 +31,7 @@ const resolvers = {
         try {
          
           const schedules = await Schedule.find({});
-          console.log(schedules);
+          console.log(`this is all the schedule ${schedules}`);
           return schedules;
       } catch (error) {
           console.error('Error retrieving shifts:', error);
@@ -40,23 +40,21 @@ const resolvers = {
   },
 
   Mutation: {
-    addShift: async (parent, { shiftState }) => {
+    addShift: async (parent, { date, day, time, username } , context) => {
       try {
-        console.log(shiftState);
-    const newShifts = await Promise.all(shiftState.map(async (shift) => {
+        console.log(date, day, time, username);
+        console.log("inside resolver");
       const newShift = await Shift.create({
-        date: shift.date,
-        day: shift.day,
-        time: shift.time,
-        username: shift.username
+        date: date,
+        day: day,
+        time: time,
+        username: username
       });
-      console.log(newShift);
-      return newShift;
-    }));
-        return newShifts;
+      console.log(`newShift from resolver ${newShift}`);
+        return newShift;
       }
       catch (error) {
-       
+        
         console.error('Error adding shift:', error);
       }
     },
@@ -64,7 +62,7 @@ const resolvers = {
       try {
         console.log(date, day, time, username);
         console.log("inside resolver");
-      const newShedule = await Shift.create({
+      const newShedule = await Schedule.create({
         date: date,
         day: day,
         time: time,

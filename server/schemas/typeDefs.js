@@ -22,13 +22,6 @@ const typeDefs = `
     username: String!
   }
 
-  input ShiftInput{
-    date: String!
-    day: String!
-    time: String!
-    username: String!
-  }
-
   type Auth {
     token: ID!
     user: User
@@ -36,7 +29,7 @@ const typeDefs = `
 
   type Query {
     users: [User]
-    shift (date: String!, time: String!): Shift
+    shift (date: String!, time: String!): [Shift]
     schedule: [Schedule]
   }
 

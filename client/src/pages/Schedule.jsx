@@ -22,7 +22,8 @@ const Schedule = () => {
           "username": 'Max Kanat-Alexander',
         }
       ];
-      
+    
+    let extracteduser = "";
     const [showNextWeek, setShowNextWeek] = useState(false);
     const [dateState, setDateState] = useState("");
     const [timeState, setTimeState] = useState("");
@@ -35,11 +36,20 @@ const Schedule = () => {
     const toggleNextWeek = () => {
         setShowNextWeek(!showNextWeek);
     };
+
+    console.log(dateState, timeState)
     const { loading, data } = useQuery( QUERY_SHIFT , {
         variables: { date: dateState, time: timeState},
       });
-     const test = data?.username || [];
-     console.log(`this is test ${test}`);
+      console.log(`this is data ${data}`);
+      console.log(data);
+      if (data) {
+        extracteduser = data.shift.map(item => ({
+            username: item.username
+        }));
+        console.log("this is the extracted data")
+        console.log(extracteduser);
+    }
    
   const handleOk = () => {
     setIsModalOpen(false);
@@ -72,6 +82,20 @@ const Schedule = () => {
         setIsModalOpen(true);
         // console.log(`Clicked on ${period} of Date: ${item.date} and Day: ${item.day}`);
     }
+
+    function showNavigation() {
+      if (extracteduser) {
+          return (
+            extracteduser.map((item, index) => (
+              <div key={index}>{item.username}</div>
+            ))
+          );
+      } else {
+          return (
+            <div className='available' onClick={() => handleModalClick()}></div>
+          );
+      }
+  }
 
     const getWeekDates = () => {
         const today = new Date();
@@ -123,17 +147,11 @@ const Schedule = () => {
             ))}
             </div>
       <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <div>{names.map((name, index) => (
-        <div onClick={() => handleModalClick(name.username)} key={index}>{name.username}</div>
-      ))}</div>
+        <div>{loading ? (<div>Loading...</div>) : (showNavigation())}</div>
       </Modal>
       <Button type="primary" size="default">
             Sent
           </Button>
-          <div>
-            {loading ? (<div>Loading...</div>
-            ):(<div className='morning'> {test} </div>)}
-          </div>
         </div>
     );
 };

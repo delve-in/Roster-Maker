@@ -12,14 +12,12 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_SHIFT = gql`
-mutation addShift($shifts: [ShiftInput!]!) {
-  addShift(shifts: $shifts) {
-    shifts{
+mutation addShift($date: String!, $day: String!, $time: String!, $username: String!) {
+  addShift(date: $date, day: $day, time: $time, username: $username) {
       date
       day
       time
       username
-    }
   }
 }`;
 

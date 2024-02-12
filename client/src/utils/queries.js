@@ -2,10 +2,10 @@ import { gql } from '@apollo/client';
 
 export const QUERY_SHIFT = gql`
 query Shift($date: String!, $time: String!) {
-    shift(date: $date, time: $time) {
-      username
-    }
+  shift(date: $date, time: $time) {
+    username
   }
+}
 `;
 
 export const QUERY_SCHEDULE = gql`

@@ -3,41 +3,9 @@ import { useState } from 'react';
 import { QUERY_SCHEDULE } from '../../utils/queries';
 import { useQuery } from '@apollo/client';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import { Button} from 'antd';
+import { Button } from 'antd';
 
 const Calender = () => {
-    const schedule = [
-        {
-            "date": "2024-02-05",
-            "day": "Monday",
-            "time": "Morning",
-            "username": "Max",
-        },
-        {
-            "date": "2024-02-06",
-            "day": "Tuesday",
-            "time": "Morning",
-            "username": "Min",
-        },
-        {
-            "date": "2024-02-06",
-            "day": "Tuesday",
-            "time": "Afternoon",
-            "username": "Max",
-        },
-        {
-            "date": "2024-02-07",
-            "day": "Tuesday",
-            "time": "Afternoon",
-            "username": "Ken",
-        },
-        {
-            "date": "2024-02-09",
-            "day": "Tuesday",
-            "time": "Afternoon",
-            "username": "Ken",
-        },
-    ];
     let extractedData = "";
     const [showNextWeek, setShowNextWeek] = useState(false);
 
@@ -59,30 +27,41 @@ const Calender = () => {
         console.log(extractedData);
     }
 
+
+
+
     function showNavigation() {
         if (extractedData) {
             return (
                 <div>
                     <div className='wrapper'>
-                        {getWeekDates().map((Item, index) => (
+                        {getWeekDates().map((day, index) => (
                             <div className='subcontainer' key={index}>
-                                <div className='date'>{Item.date}</div>
-                                <div className='day'>{Item.day}</div>
+                                <div className='date'>{day.date}</div>
+                                <div className='day'>{day.day}</div>
                                 <div className='morning'>
                                     <div className='shift'>Morning Shift</div>
-                                    {extractedData.find(item => item.date === Item.date && item.time === 'Morning')?.username && (
-                                        <div className="staff">
-                                            {extractedData.find(item => item.date === Item.date && item.time === 'Morning')?.username}
-                                        </div>
-                                    )}
+                                    {extractedData
+                                        .filter(data => data.date === day.date && data.time === 'Morning')
+                                        .map((morningData, morningIndex) => (
+                                            <div className="staff" key={morningIndex}>
+                                                {morningData.username}
+                                                {console.log(`this is morning username ${morningData.username}`)}
+                                            </div>
+                                        ))
+                                    }
                                 </div>
                                 <div className='morning'>
                                     <div className='shift'>Afternoon Shift</div>
-                                    {extractedData.find(item => item.date === Item.date && item.time === 'Afternoon')?.username && (
-                                        <div className="staff">
-                                            {extractedData.find(item => item.date === Item.date && item.time === 'Afternoon')?.username}
-                                        </div>
-                                    )}
+                                    {extractedData
+                                        .filter(data => data.date === day.date && data.time === 'Afternoon')
+                                        .map((afternoonData, afternoonIndex) => (
+                                            <div className="staff" key={afternoonIndex}>
+                                                {afternoonData.username}
+                                                {console.log(`this is Afternoon username ${afternoonData.username}`)}
+                                            </div>
+                                        ))
+                                    }
                                 </div>
                             </div>
                         ))}
@@ -143,10 +122,10 @@ const Calender = () => {
 
     return (
         <div >
-             <Button type="primary" onClick={toggleNextWeek} icon={<LeftOutlined />} disabled={!showNextWeek} size="default" />
-             <Button type="primary" onClick={toggleNextWeek} icon={<RightOutlined />} disabled={showNextWeek} size="default" />
-            <div>{loading ? (<div>Loading...</div>):(showNavigation())}</div>
-            
+            <Button type="primary" onClick={toggleNextWeek} icon={<LeftOutlined />} disabled={!showNextWeek} size="default" />
+            <Button type="primary" onClick={toggleNextWeek} icon={<RightOutlined />} disabled={showNextWeek} size="default" />
+            <div>{loading ? (<div>Loading...</div>) : (showNavigation())}</div>
+
         </div>
     );
 };
