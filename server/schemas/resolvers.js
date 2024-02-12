@@ -20,8 +20,6 @@ const resolvers = {
           
           console.log("this is the return of shift.find");
           console.log(user);
-          // const username = user.map(item => item.username)
-          // console.log(username);
           return user;
       } catch (error) {
           console.error('Error retrieving shifts:', error);
