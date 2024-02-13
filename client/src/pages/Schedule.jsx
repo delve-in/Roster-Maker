@@ -172,9 +172,6 @@ const Schedule = () => {
                                 <Radio.Button value="Afternoon" danger >Afternoon</Radio.Button>
                             </Radio.Group></div>
       </Modal>
-      <Button type="primary" size="default">
-            Sent
-          </Button>
         </div>
     );
 };
