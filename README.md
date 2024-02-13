@@ -10,13 +10,11 @@ TimeWise allows staff to login and sent thier shifts for the coming week, which 
 
 ## Table of Contents
 
-* [Deployed](#Deployed)
+* [Deployed](#deployed)
 
 * [Installation](#installation)
 
 * [Usage](#usage)
-
-* [Credits](#credits)
   
 * [License](#license)
 
@@ -24,7 +22,9 @@ TimeWise allows staff to login and sent thier shifts for the coming week, which 
 
 * [Questions](#questions)
 
-## Deployed applicatin link
+## Deployed
+
+Deployed applicatin link:
 
 [https://roster-manager-71d6219bcde1.herokuapp.com/](https://roster-manager-71d6219bcde1.herokuapp.com/)
 
@@ -58,7 +58,7 @@ When you click on availability, you will be presented with the folowwing page.
 
 you can select your availibility by clicking on the Morning, Afternoon or Not Available section for each day. Once you have selected your availability click the submit button.
 
-![alt text](image-3.png).
+![alt text](image-3.png)
 
 If you have successfully submited you shift you will see the following message.
 
@@ -72,11 +72,57 @@ You can click on Roster on the navigation bar to view the Roster page.
 
 which will display the roster set by the manager.
 
+You can click on the arrow buttons on the top left part of the page to toggle current week or next week view
+
+![alt text](image-11.png)
+
 For a manager the view of the website will be slightly different. Manager will have an extra Schedule page.
+
+![alt text](image-9.png)
+
+You can click on the Morning or Afternoon section to schedule the staff. When you click on it the following will pop up.
 
 ![alt text](image-7.png)
 
-You can click on the Morning or Afternoon section to schedule the staff. When you click on it the following will pop up.
+This displays the people who have sent thier availibility for that particular shift.
+
+For example: 
+
+In the image above, David Thomas and Brian Keringhan has given thier availibity for the morning shift on 20-02-2024.
+
+You can select any one of them at a time (you can add multiple people for same shift but it should be done one by one).
+
+Once select one person by cling on thier name, the following message will be shown:
+
+![alt text](image-8.png)
+
+which implies you have successfully scheduled that person for that particular shift.
+
+You can move on to the Roster page to view the roster you have created
+
+![alt text](image-10.png)
+
+Enjoy using the app !
+
+## License
+
+This project is licensed under the MIT license.
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute to the TimeWise Website, please follow these steps:
+
+1. Fork the repository
+2. Create a new branch: `git checkout -b feature/my-feature`
+3. Make your changes and commit them: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin feature/my-feature`
+5. Submit a pull request
+
+## Questions
+
+If you have any questions about the repo, open an issue or contact me directly at write2delvin@gmail.com. You can find more of my work at [delve-in](http://github.com/delve-in/).
+
+
 
 
 
