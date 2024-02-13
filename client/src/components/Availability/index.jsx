@@ -6,10 +6,7 @@ import './Availability.css'
 
 
 const Availability = () => {
-    const toggleNextWeek = () => {
-        setShowNextWeek(!showNextWeek);
-    };
-    
+    let flag = 0 ;
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [shiftState, setShiftState] = useState([]);
     let username = localStorage.getItem("username");
@@ -41,9 +38,13 @@ const Availability = () => {
             for (const shiftData of shiftState){
                 const shift = await addShift({variables: shiftData});
                 console.log(`shift added ${shift}`);
-                setIsModalOpen(true);
+                flag = 1;
             }
 
+            if(flag === 1){
+                setIsModalOpen(true);
+            }
+            
         } catch (err) {
           console.error(err);
         }

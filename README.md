@@ -40,49 +40,49 @@ Open the link to the website
 
 When you open the link you are greeted with a login page as below. 
 
-![alt text](image.png)
+![alt text](./client/public/image.png)
 
 Please login to continue.
 
 Once you login you will be greeted with the following page, The Dashboard. It will display your full name.
 
-![alt text](image-6.png)
+![alt text](./client/public/image-6.png)
 
 Once you have logged in if you are a staff you will see the following navigation. 
 
-![alt text](image-1.png)
+![alt text](./client/public/image-1.png)
 
 When you click on availability, you will be presented with the folowwing page.
 
-![alt text](image-2.png)
+![alt text](./client/public/image-2.png)
 
 you can select your availibility by clicking on the Morning, Afternoon or Not Available section for each day. Once you have selected your availability click the submit button.
 
-![alt text](image-3.png)
+![alt text](./client/public/image-3.png)
 
 If you have successfully submited you shift you will see the following message.
 
-![alt text](image-4.png)
+![alt text](./client/public/image-4.png)
 
 This means you shift was sent to the manager now you can wait for you manager to schedule you according to your availability.
 
 You can click on Roster on the navigation bar to view the Roster page.
 
-![alt text](image-5.png)
+![alt text](./client/public/image-5.png)
 
 which will display the roster set by the manager.
 
 You can click on the arrow buttons on the top left part of the page to toggle current week or next week view
 
-![alt text](image-11.png)
+![alt text](./client/public/image-11.png)
 
 For a manager the view of the website will be slightly different. Manager will have an extra Schedule page.
 
-![alt text](image-9.png)
+![alt text](./client/public/image-9.png)
 
 You can click on the Morning or Afternoon section to schedule the staff. When you click on it the following will pop up.
 
-![alt text](image-7.png)
+![alt text](./client/public/image-7.png)
 
 This displays the people who have sent thier availibility for that particular shift.
 
@@ -94,13 +94,13 @@ You can select any one of them at a time (you can add multiple people for same s
 
 Once select one person by cling on thier name, the following message will be shown:
 
-![alt text](image-8.png)
+![alt text](./client/public/image-8.png)
 
 which implies you have successfully scheduled that person for that particular shift.
 
 You can move on to the Roster page to view the roster you have created
 
-![alt text](image-10.png)
+![alt text](./client/public/image-10.png)
 
 Enjoy using the app !
 
